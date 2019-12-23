@@ -104,6 +104,19 @@ namespace BookListMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //GET Book/Details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var book = await _dbContext.Books.SingleOrDefaultAsync(m => m.Id == id);
+
+            if (book == null)
+                return NotFound();
+
+            return View(book);
+        }
 
     }
 
